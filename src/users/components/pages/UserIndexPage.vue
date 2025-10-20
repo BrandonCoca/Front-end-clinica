@@ -6,7 +6,7 @@
     </v-row>
 </template>
 <script>
-import UserDetails from "../organisms/UserDetails.vue";
+import UserDetails from "@/users/components/organisms/UserDetails.vue";
 import { UserService } from "@/users/services/UserService.js";
 
 export default {
