@@ -7,17 +7,21 @@ import { loadFonts } from './plugins/webfontloader.js'
 loadFonts()
 
 import UserIndexPage from '@/users/components/pages/UserIndexPage.vue'
+import LoginPage from '@/auth/components/pages/LoginPage.vue'
+import CreateUserPage from '@/users/components/pages/CreateUserPage.vue'
+import DashboardPage from './DashboardPage.vue'
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
+        { path: '/', redirect: '/login' },
         //Ingreso
-        //{ path: '/login', name: 'login', component: LoginPage },
+        { path: '/login', name: 'login', component: LoginPage, meta: { showHeader: false } },
         //Pantalla general
-        // { path: '/', name: 'dashboard', component: DashboardPage },
+        { path: '/inicio', name: 'dashboard', component: DashboardPage, meta: { showHeader: true } },
         // //Usuarios
-        { path: '/usuarios', name: 'users.index', component: UserIndexPage },
-        // { path: '/usuarios/crear', name: 'users.create', component: UserCreatePage },
+        { path: '/usuarios', name: 'users.index', component: UserIndexPage, meta: { showHeader: true } },
+        { path: '/usuarios/crear', name: 'users.create', component: CreateUserPage, meta: { showHeader: true } },
         // { path: '/usuarios/:id/editar', name: 'users.edit', component: UserEditPage },
         // //Profesionales
         // { path: '/profesionales', name: 'professionals.index', component: ProfessionalIndexPage },

@@ -6,16 +6,17 @@
                         height: '150px',
                         background: 'gray',
                         borderRadius: '50%',
-                        backgroundImage: `url(${userAvatar})`,
+                        //backgroundImage: `url(${userAvatar})`,
+                        backgroundImage: `url('/admin.jpg')`,
                         backgroundSize: 'contain'
                     }"
                     ></div>
                 </div>
                 <v-card-title class="text-center" style="padding: 0px">
-                    {{user.name ?? []}}
+                  <!--  {{user.name ?? []}} --> nombre
                 </v-card-title>
                 <v-card-subtitle class="text-center" style="margin-top: -8px">
-                    {{ user.rol ?? [] }}
+                  <!--  {{ user.rol ?? [] }} --> rol
                 </v-card-subtitle>
                 <v-card-actions>
                     <v-row>
@@ -36,16 +37,16 @@
 <script>
     export default {
         props: {
-            user: Object
+            //user: Object
         },
         computed: {
-            userAvatar() {
-                const role = this.user.rol.toLowerCase();
-                return `/${role}.jpg`;
-            }
+            //userAvatar() {
+                //const role = this.user.rol.toLowerCase();
+                //return `/${role}.jpg`;
+            //}
         },
         mounted() {
-            console.log(this.user)
+            //console.log(this.user)
         }
     };
 </script>
