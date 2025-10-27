@@ -6,11 +6,14 @@ import { loadFonts } from './plugins/webfontloader.js'
 
 loadFonts()
 
-import UserIndexPage from '@/users/components/pages/UserIndexPage.vue'
 import LoginPage from '@/auth/components/pages/LoginPage.vue'
-import CreateUserPage from '@/users/components/pages/CreateUserPage.vue'
 import DashboardPage from './Navegacion/DashboardPage.vue'
+import IndexUserPage from '@/users/components/pages/IndexUserPage.vue'
+import CreateUserPage from '@/users/components/pages/CreateUserPage.vue'
 import EditUserPage from './users/components/pages/EditUserPage.vue'
+import IndexProfessionalPage from '@/professionals/components/pages/IndexProfessionalPage.vue'
+import CreateProfessionalPage from '@/professionals/components/pages/CreateProfessionalPage.vue'
+import EditProfessionalPage from '@/professionals/components/pages/EditProfessionalPage.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -20,19 +23,19 @@ const router = createRouter({
         { path: '/login', name: 'login', component: LoginPage, meta: { showHeader: false } },
         //Pantalla general
         { path: '/inicio', name: 'dashboard', component: DashboardPage, meta: { showHeader: true } },
-        // //Usuarios
-        { path: '/usuarios', name: 'users.index', component: UserIndexPage, meta: { showHeader: true } },
+        //Usuarios
+        { path: '/usuarios', name: 'users.index', component: IndexUserPage, meta: { showHeader: true } },
         { path: '/usuarios/crear', name: 'users.create', component: CreateUserPage, meta: { showHeader: true } },
         { path: '/usuarios/id/editar', name: 'users.edit', component: EditUserPage, meta: { showHeader: true } },
-        // //Profesionales
-        // { path: '/profesionales', name: 'professionals.index', component: ProfessionalIndexPage },
-        // { path: '/profesionales/crear', name: 'professionals.create', component: ProfessionalCreatePage },
-        // { path: '/profesionales/:id/editar', name: 'professionals.edit', component: ProfessionalEditPage },
-        // //Pacientes
-        // { path: '/pacientes', name: 'patients.index', component: PatientIndexPage },
-        // { path: '/pacientes/crear', name: 'patients.create', component: PatientCreatePage },
-        // { path: '/pacientes/:id/editar', name: 'patients.edit', component: PatientEditPage },
-        // { path: '/pacientes/:id/consulta', name: 'patients.consultation', component: PatientConsultationPage },
+        //Profesionales
+        { path: '/profesionales', name: 'professionals.index', component: IndexProfessionalPage, meta: { showHeader: true } },
+        { path: '/profesionales/crear', name: 'professionals.create', component: CreateProfessionalPage, meta: { showHeader: true } },
+        { path: '/profesionales/id/editar', name: 'professionals.edit', component: EditProfessionalPage, meta: { showHeader: true } },
+        //Pacientes
+        // { path: '/pacientes', name: 'patients.index', component: IndexPatientPage },
+        // { path: '/pacientes/crear', name: 'patients.create', component: CreatePatientPage },
+        // { path: '/pacientes/id/editar', name: 'patients.edit', component: EditPatientPage },
+        // { path: '/pacientes/id/consulta', name: 'patients.consultation', component: PatientConsultationPage },
         // //Citas
         // { path: '/citas', name: 'quotes.index', component: QuoteIndexPage },
         // { path: '/citas/crear', name: 'quotes.create', component: QuoteCreatePage },

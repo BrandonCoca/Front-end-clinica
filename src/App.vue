@@ -16,10 +16,10 @@
               <router-link to="/usuarios">Usuarios</router-link>
             </li>
             <li>
-              <router-link to="/categorias">Doctores</router-link>
+              <router-link to="/profesionales">Profesionales</router-link>
             </li>
             <li>
-              <router-link to="/tendencias">Pacientes</router-link>
+              <router-link to="/pacientes">Pacientes</router-link>
             </li>
             <li class="btn-menu-item">
               <v-btn class="btn-system" @click="otherMenu">Usuario</v-btn>
