@@ -21,12 +21,12 @@
                 <v-card-actions>
                     <v-row>
                         <v-col cols="6">
-                            <v-btn style="width: 100%">
+                            <v-btn v-on:click="onDeleteUser" class="btn-nor" style="width: 100%">
                                 Eliminar
                             </v-btn>
                         </v-col>
                         <v-col cols="6">
-                            <v-btn style="width: 100%">
+                            <v-btn class="btn-nor" style="width: 100%" :to="{name: 'users.edit'}">
                                 Editar
                             </v-btn>
                         </v-col>
@@ -35,6 +35,7 @@
             </v-card>
 </template>
 <script>
+import Swal from 'sweetalert2';
     export default {
         props: {
             //user: Object
@@ -47,6 +48,20 @@
         },
         mounted() {
             //console.log(this.user)
+        },
+        methods: {
+            async onDeleteUser(){
+                const result = await Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: '¿Quieres inhabilitar al usuario?',
+                    icon: 'warrning',
+                    showCancelButton: true,
+                });
+                if(!result.isConfirmed){
+                    return;
+                }
+                Swal.fire('Eliminado')
+            }
         }
     };
 </script>

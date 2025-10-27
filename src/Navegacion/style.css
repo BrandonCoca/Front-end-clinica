@@ -11,6 +11,7 @@
 * {
     margin: 0;
     padding: 0;
+    color: var(--color-texto);
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
@@ -29,6 +30,16 @@ header {
     background-color: var(--background-color);
 }
 
+header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: linear-gradient(to left, #C1ECE8, #08605D);
+}
+
 header .contenedor {
 
     display: flex;
@@ -44,6 +55,7 @@ header .contenedor {
 header .logo {
     display: flex;
     align-items: center;
+    margin-right: auto;
 }
 
 header .logo ion-icon {
@@ -149,44 +161,6 @@ main .seccion-1 {
     justify-content: center;
 }
 
-main .seccion-1 .texto {
-    color: white;
-    font-size: 5.1vw;
-    font-weight: 600;
-    line-height: 4.2vw;
-    width: 30vw;
-}
-
-main .seccion-1 .texto .precio-antiguo {
-    font-size: 3.5vw;
-    color: #7D7E93;
-    position: relative;
-    margin: 20px;
-    font-weight: 300;
-}
-
-main .seccion-1 .texto .precio-antiguo::before {
-    content: "";
-    position: absolute;
-    left: -18%;
-    top: 50%;
-    width: 140%;
-    height: 3px;
-    background-color: #7D7E93;
-    transform: translateY(-50%);
-}
-
-main .seccion-1 .texto .precio-nuevo {
-    font-size: 3.5vw;
-    color: var(--color);
-    font-weight: 300;
-}
-
-main .seccion-1 img {
-    width: 40vw;
-
-}
-
 @media (max-width: 865px) {
 
     header #btn-menu {
@@ -259,4 +233,18 @@ main .seccion-1 img {
     main .seccion-1 img {
         width: 100vw;
     }
+}
+
+.btn-nor {
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: var(--color-principal);
+    color: var(--color-texto);
+    font-size: 15px;
+}
+
+.users-container {
+    padding-top: 80px;
+    padding-inline: 20px;
 }

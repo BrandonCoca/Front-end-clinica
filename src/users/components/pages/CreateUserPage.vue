@@ -1,40 +1,42 @@
 <template>
     <div class="users-container">
-        <v-form @submit.prevent="onSubmit">
-            <v-conteiner>
-                <v-row class="my-4">
-                    <v-col cols="12" md="6">
-                        <v-text-field v-model="name" label="Nombre del usuario" required>
-                            
-                        </v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="6">
-                        <v-text-field v-model="password" label="Contraseña" type="password" required>
-                            
-                        </v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="6">
-                        <v-text-field v-model="repeatedPassword" label="Verificar contraseña" type="password" required>
-                            
-                        </v-text-field>
-                    </v-col>
-                    <v-col cols="12" md="6">
-                        <v-select v-model="selectRole" label="Rol" required :items="roleOptions" item-title="text" item-value="value">
-                        </v-select>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-btn type="submit" class="btn-n">
-                            Crear usuario
-                        </v-btn>
-                    </v-col>
-                    <v-col cols="6">
-                        <v-btn type="submit" class="btn-n">
-                            Cancelar
-                        </v-btn>
-                    </v-col>
-                </v-row>
-            </v-conteiner>
-        </v-form>
+        <v-card class="mt-8 mx-auto" max-width="1000">
+            <v-form @submit.prevent="onSubmit">
+                <v-conteiner>
+                    <v-row class="my-4">
+                        <v-col cols="12" md="6">
+                            <v-text-field v-model="name" label="Nombre del usuario" required>
+                                
+                            </v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-text-field v-model="password" label="Contraseña" type="password" required>
+                                
+                            </v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-text-field v-model="repeatedPassword" label="Verificar contraseña" type="password" required>
+                                
+                            </v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-select v-model="selectRole" label="Rol" required :items="roleOptions" item-title="text" item-value="value">
+                            </v-select>
+                        </v-col>
+                        <v-col cols="6" class="d-flex justify-center">
+                            <v-btn type="submit" class="btn-nor">
+                                Crear usuario
+                            </v-btn>
+                        </v-col>
+                        <v-col cols="6" class="d-flex justify-center">
+                            <v-btn type="submit" class="btn-nor">
+                                Cancelar
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                </v-conteiner>
+            </v-form>
+        </v-card>
     </div>
 </template>
 <script>
@@ -56,28 +58,12 @@ export default {
     },
     methods: {
         onSubmit(){
-            console.log({
-                name: this.name,
-                password: this.password,
-                repeated: this.repeatedPassword,
-                selectRole: this.selectRole
-            })
+            if(this.password != this.repeatedPassword){
+                return alert('La contraseña debe der la misma')
+            }
             this.$router.push({ name: 'users.index' });
         }
     }
 }
 
 </script>
-<style >
-.users-container {
-    padding-top: 60px;
-}
-.btn-n {
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-    background-color: var(--color-principal);
-    color: var(--color-texto);
-    font-size: 15px;
-}
-</style>

@@ -9,7 +9,8 @@ loadFonts()
 import UserIndexPage from '@/users/components/pages/UserIndexPage.vue'
 import LoginPage from '@/auth/components/pages/LoginPage.vue'
 import CreateUserPage from '@/users/components/pages/CreateUserPage.vue'
-import DashboardPage from './DashboardPage.vue'
+import DashboardPage from './Navegacion/DashboardPage.vue'
+import EditUserPage from './users/components/pages/EditUserPage.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -22,7 +23,7 @@ const router = createRouter({
         // //Usuarios
         { path: '/usuarios', name: 'users.index', component: UserIndexPage, meta: { showHeader: true } },
         { path: '/usuarios/crear', name: 'users.create', component: CreateUserPage, meta: { showHeader: true } },
-        // { path: '/usuarios/:id/editar', name: 'users.edit', component: UserEditPage },
+        { path: '/usuarios/id/editar', name: 'users.edit', component: EditUserPage, meta: { showHeader: true } },
         // //Profesionales
         // { path: '/profesionales', name: 'professionals.index', component: ProfessionalIndexPage },
         // { path: '/profesionales/crear', name: 'professionals.create', component: ProfessionalCreatePage },
