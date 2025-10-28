@@ -1,8 +1,14 @@
 <template>
   <main>
-        <section class="seccion-1">
-            <div>
+        <section>
+            <div class="text-center">
                 <h1>Citas Programadas</h1>
+            </div>
+        </section>
+        <section width="100%" class="seccion-1">
+            <img src='/calendario.jpg'/>
+            <div>
+                <p>Citas programadas segun dia y hora</p>   
             </div>
         </section>
     </main>

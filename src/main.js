@@ -17,6 +17,8 @@ import EditProfessionalPage from '@/professionals/components/pages/EditProfessio
 import IndexPatientPage from '@/patients/components/pages/IndexPatientPage.vue'
 import CreatePatientPage from '@/patients/components/pages/CreatePatientPage.vue'
 import EditPatientPage from '@/patients/components/pages/EditPatientPage.vue'
+import ConsultationPatientPage from '@/patients/components/pages/ConsultationPatientPage.vue'
+import CreateConsultationPage from '@/patients/components/pages/CreateConsultationPage.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -38,20 +40,13 @@ const router = createRouter({
         { path: '/pacientes', name: 'patients.index', component: IndexPatientPage, meta: { showHeader: true } },
         { path: '/pacientes/crear', name: 'patients.create', component: CreatePatientPage, meta: { showHeader: true } },
         { path: '/pacientes/id/editar', name: 'patients.edit', component: EditPatientPage, meta: { showHeader: true } },
-        // { path: '/pacientes/id/consulta', name: 'patients.consultation', component: PatientConsultationPage },
-        // //Citas
+        { path: '/pacienteID/consulta', name: 'patients.consultation', component: ConsultationPatientPage, meta: { showHeader: true } },
+        { path: '/pacienteID/consulta/crear', name: 'consultations.create', component: CreateConsultationPage, meta: { showHeader: true } },
+        //Citas
         // { path: '/citas', name: 'quotes.index', component: QuoteIndexPage },
         // { path: '/citas/crear', name: 'quotes.create', component: QuoteCreatePage },
         // { path: '/citas/:id/editar', name: 'quotes.edit', component: QuoteEditPage },
-        // //Consultas
-        // { path: '/consultas/:pacienteID', name: 'consultations.index', component: ConsultationIndexPage },
-        // { path: '/consultas/:pacienteID/crear', name: 'consultations.create', component: ConsultationCreatePage },
-        // //Recetas
-        // { path: '/consultas/:consultaID:/receta', name: 'recets.show', component: RecetShowPage },
-        // { path: '/consultas/:consultaID:/receta/crear', name: 'recets.create', component: RecetCreatePage },
-        // { path: '/consultas/:consultaID:/receta/editar', name: 'recets.edit', component: RecetEditPage },
-        // { path: '/consultas/:consultaID:/receta/imprimir', name: 'recets.print', component: RecetPrintPage },
-        // //Reportes
+        //Reportes
         // { path: '/trazabilidad', name: 'trazabilities.index', component: TrazabilitiesIndexPage },
     ]
 });

@@ -4,7 +4,7 @@
             <v-col cols="12">
                 <h3>
                     Pacientes
-                    <v-btn class="btn-nor" style="float: right" v-on:click="$router.push({name: 'patients.create'})">Añadir</v-btn>   
+                    <v-btn class="btn-nor" style="float: right" v-on:click="$router.push({name: 'patients.create'})">Añadir</v-btn>
                 </h3>
             </v-col>
             <v-col cols="12" md="6" lg="4">

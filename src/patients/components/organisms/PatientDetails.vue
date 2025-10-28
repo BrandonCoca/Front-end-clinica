@@ -18,14 +18,20 @@
         </v-card-subtitle>
         <v-card-actions>
             <v-row>
-                <v-col cols="6">
+                <v-col cols="4">
                     <v-btn v-on:click="onDeleteProfessional" class="btn-nor" style="width: 100%;">
                         Eliminar
                     </v-btn>
                 </v-col>
-                <v-col cols="6">
+                <v-col cols="4">
                     <v-btn class="btn-nor" style="width: 100%" :to="{name: 'patients.edit'}">
                         Editar
+                    </v-btn>
+                </v-col>
+                
+                <v-col cols="4">
+                    <v-btn class="btn-nor" style="width: 100%" :to="{name: 'patients.consultation'}">
+                        Historial
                     </v-btn>
                 </v-col>
             </v-row>

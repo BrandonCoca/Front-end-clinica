@@ -10,7 +10,7 @@
                             </v-text-field>
                         </v-col>
                         <v-col cols="12" md="6">
-                            <v-text-field v-model="matricula" label="Contraseña" required>
+                            <v-text-field v-model="matricula" label="Matricula" required>
                             </v-text-field>
                         </v-col>
                         <v-col cols="12" md="6">
