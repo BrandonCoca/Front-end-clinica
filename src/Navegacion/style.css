@@ -248,3 +248,7 @@ main .seccion-1 {
     padding-top: 80px;
     padding-inline: 20px;
 }
+
+.v-card-subtitle {
+    color: black;
+}

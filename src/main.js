@@ -14,6 +14,9 @@ import EditUserPage from './users/components/pages/EditUserPage.vue'
 import IndexProfessionalPage from '@/professionals/components/pages/IndexProfessionalPage.vue'
 import CreateProfessionalPage from '@/professionals/components/pages/CreateProfessionalPage.vue'
 import EditProfessionalPage from '@/professionals/components/pages/EditProfessionalPage.vue'
+import IndexPatientPage from '@/patients/components/pages/IndexPatientPage.vue'
+import CreatePatientPage from '@/patients/components/pages/CreatePatientPage.vue'
+import EditPatientPage from '@/patients/components/pages/EditPatientPage.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -32,9 +35,9 @@ const router = createRouter({
         { path: '/profesionales/crear', name: 'professionals.create', component: CreateProfessionalPage, meta: { showHeader: true } },
         { path: '/profesionales/id/editar', name: 'professionals.edit', component: EditProfessionalPage, meta: { showHeader: true } },
         //Pacientes
-        // { path: '/pacientes', name: 'patients.index', component: IndexPatientPage },
-        // { path: '/pacientes/crear', name: 'patients.create', component: CreatePatientPage },
-        // { path: '/pacientes/id/editar', name: 'patients.edit', component: EditPatientPage },
+        { path: '/pacientes', name: 'patients.index', component: IndexPatientPage, meta: { showHeader: true } },
+        { path: '/pacientes/crear', name: 'patients.create', component: CreatePatientPage, meta: { showHeader: true } },
+        { path: '/pacientes/id/editar', name: 'patients.edit', component: EditPatientPage, meta: { showHeader: true } },
         // { path: '/pacientes/id/consulta', name: 'patients.consultation', component: PatientConsultationPage },
         // //Citas
         // { path: '/citas', name: 'quotes.index', component: QuoteIndexPage },
