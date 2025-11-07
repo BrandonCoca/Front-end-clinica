@@ -34,9 +34,7 @@
 
         methods: {
             onLogin(){
-                if(this.name==="Brandon" && this.password==="12345"){
-                        this.$router.push({ name: 'dashboard' })
-                    }
+                this.$router.push({ name: 'dashboard' })
             }
         }
     };
