@@ -21,7 +21,7 @@
 </template>
 <script>
 
-    //import { AuthService } from '@/auth/services/AuthService';
+    import { AuthService } from '@/auth/services/AuthService';
 
     export default {
 
@@ -33,8 +33,11 @@
         },
 
         methods: {
-            onLogin(){
-                this.$router.push({ name: 'dashboard' })
+            async onLogin(){
+                const response = await AuthService.login(this.name, this.password);
+                if(response.token){
+                    this.$router.push({ name: 'dashboard' })
+                }
             }
         }
     };
