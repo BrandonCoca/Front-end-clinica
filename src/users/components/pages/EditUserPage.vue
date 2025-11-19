@@ -2,20 +2,20 @@
     <div class="users-container">
         <v-card class="mt-8 mx-auto" max-width="1000">
             <v-container>
-                <v-from>
+                <v-from @submit.prevent="onSubmit">
                     <v-row>
                         <v-col cols="12" class="mt-2">
-                            <v-text-field label="Nombre del usuario"></v-text-field>
+                            <v-text-field label="Nombre del usuario" v-model="user.name"></v-text-field>
                         </v-col>
                         <v-col cols="12">
-                            <v-select v-model="selectRole" label="Rol" required :items="roleOptions" item-title="text" item-value="value">
+                            <v-select v-model="selectRole" label="Rol" :items="roleOptions" item-title="text" item-value="value">
                             </v-select>
                         </v-col>
                         <v-col cols="6">
-                            <v-btn type="submit" class="btn-nor" :to="{name: 'users.index'}">Guardar</v-btn>
+                            <v-btn type="submit" class="btn-nor">Guardar</v-btn>
                         </v-col>
                         <v-col cols="6">
-                            <v-btn type="submit" class="btn-nor" :to="{name: 'users.index'}">Cancelar</v-btn>
+                            <v-btn type="button" class="btn-nor" :to="{name: 'users.index'}">Cancelar</v-btn>
                         </v-col>
                     </v-row>
                 </v-from>
@@ -24,9 +24,14 @@
     </div>
 </template>
 <script>
+import backend from '@/backend';
+
 export default {
     data() {
         return {
+            user: {
+                name: '',
+            },
             selectRole: '',
             roleOptions: [
                 { text: 'Administrador', value: 'admin' },
@@ -36,5 +41,18 @@ export default {
             ]
         }
     },
+    async mounted() {
+        const userId = this.$route.params.id;
+        this.user = (await backend.get(`usuarios/${userId}`)).data;
+        this.selectRole = this.user.role;
+    },
+    methods: {
+        async onSubmit() {
+            await backend.patch(`usuarios/${this.$route.params.id}`, {
+                name: this.user.name,
+                rol: this.selectRole
+            });
+        }
+    }
 }
 </script>

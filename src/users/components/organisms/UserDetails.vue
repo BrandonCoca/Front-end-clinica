@@ -1,22 +1,21 @@
 <template>
-    <v-card class="pt-4" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+    <v-card v-if="display && user" class="pt-4" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
                 <div class="d-flex mb-2" style="justify-content: center">
                     <div :style="{
                         width: '150px',
                         height: '150px',
                         background: 'gray',
                         borderRadius: '50%',
-                        //backgroundImage: `url(${userAvatar})`,
-                        backgroundImage: `url('/admin.jpg')`,
+                        backgroundImage: `url(${userAvatar})`,
                         backgroundSize: 'contain'
                     }"
                     ></div>
                 </div>
                 <v-card-title class="text-center" style="padding: 0px">
-                  <!--  {{user.name ?? []}} --> nombre
+                   {{user.name ?? []}}
                 </v-card-title>
                 <v-card-subtitle class="text-center" style="margin-top: -8px">
-                  <!--  {{ user.rol ?? [] }} --> rol
+                   {{ user.rol ?? [] }} 
                 </v-card-subtitle>
                 <v-card-actions>
                     <v-row>
@@ -26,7 +25,7 @@
                             </v-btn>
                         </v-col>
                         <v-col cols="6">
-                            <v-btn class="btn-nor" style="width: 100%" :to="{name: 'users.edit'}">
+                            <v-btn class="btn-nor" style="width: 100%" :to="{name: 'users.edit', params: {id: user.id}}">
                                 Editar
                             </v-btn>
                         </v-col>
@@ -36,18 +35,24 @@
 </template>
 <script>
 import Swal from 'sweetalert2';
+//import backend from '@/backend';
     export default {
         props: {
-            //user: Object
+            user: Object
         },
         computed: {
-            //userAvatar() {
-                //const role = this.user.rol.toLowerCase();
-                //return `/${role}.jpg`;
-            //}
+            userAvatar() {
+                const role = this.user.rol.toLowerCase();
+                return `/${role}.jpg`;
+            }
         },
         mounted() {
-            //console.log(this.user)
+            console.log(this.user)
+        },
+        data() {
+            return {
+                display: true
+            };
         },
         methods: {
             async onDeleteUser(){
@@ -61,6 +66,8 @@ import Swal from 'sweetalert2';
                     return;
                 }
                 Swal.fire('Eliminado')
+                //await backend.delete(`usuarios/${this.user.id}`);
+                //this.display = false;
             }
         }
     };

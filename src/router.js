@@ -27,15 +27,15 @@ const router = createRouter({
         //Usuarios
         { path: '/usuarios', name: 'users.index', component: IndexUserPage, meta: { showHeader: true, requiresAuth: true } },
         { path: '/usuarios/crear', name: 'users.create', component: CreateUserPage, meta: { showHeader: true, requiresAuth: true } },
-        { path: '/usuarios/id/editar', name: 'users.edit', component: EditUserPage, meta: { showHeader: true, requiresAuth: true } },
+        { path: '/usuarios/:id/editar', name: 'users.edit', component: EditUserPage, meta: { showHeader: true, requiresAuth: true } },
         //Profesionales
         { path: '/profesionales', name: 'professionals.index', component: IndexProfessionalPage, meta: { showHeader: true, requiresAuth: true } },
         { path: '/profesionales/crear', name: 'professionals.create', component: CreateProfessionalPage, meta: { showHeader: true, requiresAuth: true } },
-        { path: '/profesionales/id/editar', name: 'professionals.edit', component: EditProfessionalPage, meta: { showHeader: true, requiresAuth: true } },
+        { path: '/profesionales/:id/editar', name: 'professionals.edit', component: EditProfessionalPage, meta: { showHeader: true, requiresAuth: true } },
         //Pacientes
         { path: '/pacientes', name: 'patients.index', component: IndexPatientPage, meta: { showHeader: true, requiresAuth: true } },
         { path: '/pacientes/crear', name: 'patients.create', component: CreatePatientPage, meta: { showHeader: true, requiresAuth: true } },
-        { path: '/pacientes/id/editar', name: 'patients.edit', component: EditPatientPage, meta: { showHeader: true, requiresAuth: true } },
+        { path: '/pacientes/:id/editar', name: 'patients.edit', component: EditPatientPage, meta: { showHeader: true, requiresAuth: true } },
         { path: '/pacienteID/consulta', name: 'patients.consultation', component: ConsultationPatientPage, meta: { showHeader: true, requiresAuth: true } },
         { path: '/pacienteID/consulta/crear', name: 'consultations.create', component: CreateConsultationPage, meta: { showHeader: true, requiresAuth: true } },
         //Citas

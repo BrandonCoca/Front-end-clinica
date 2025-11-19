@@ -29,7 +29,7 @@
                             </v-btn>
                         </v-col>
                         <v-col cols="6" class="d-flex justify-center">
-                            <v-btn type="submit" class="btn-nor">
+                            <v-btn type="button" class="btn-nor" @click="onCancel">
                                 Cancelar
                             </v-btn>
                         </v-col>
@@ -40,7 +40,7 @@
     </div>
 </template>
 <script>
-
+import backend from '@/backend.js';
 export default {
     data() {
         return {
@@ -57,10 +57,23 @@ export default {
         }
     },
     methods: {
-        onSubmit(){
+        async onSubmit(){
             if(this.password != this.repeatedPassword){
                 return alert('La contraseña debe der la misma')
             }
+            if (!this.name || !this.password || !this.selectRole) {
+                return alert('Todos los campos son requeridos');
+            }
+            await backend.post('usuarios', {
+                name: this.name,
+                password: this.password,
+                rol: this.selectRole
+            });
+
+            this.$router.push({ name: 'users.index' });
+                
+        },
+        onCancel(){
             this.$router.push({ name: 'users.index' });
         }
     }
