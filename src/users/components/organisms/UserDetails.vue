@@ -14,8 +14,11 @@
                 <v-card-title class="text-center" style="padding: 0px">
                    {{user.name ?? []}}
                 </v-card-title>
-                <v-card-subtitle class="text-center" style="margin-top: -8px">
+                <v-card-subtitle class="text-center" style="margin-top: -4px">
                    {{ user.rol ?? [] }} 
+                </v-card-subtitle>
+                <v-card-subtitle class="text-center" style="margin-top: -4px">
+                   {{ formattedUltimaConexion ?? 'Nunca conectado' }} 
                 </v-card-subtitle>
                 <v-card-actions>
                     <v-row>
@@ -25,7 +28,7 @@
                             </v-btn>
                         </v-col>
                         <v-col cols="6">
-                            <v-btn class="btn-nor" style="width: 100%" :to="{name: 'users.edit', params: {id: user.id}}">
+                            <v-btn class="btn-nor" style="width: 100%" v-on:click="onEditUser">
                                 Editar
                             </v-btn>
                         </v-col>
@@ -43,7 +46,17 @@ import Swal from 'sweetalert2';
         computed: {
             userAvatar() {
                 const role = this.user.rol.toLowerCase();
-                return `/${role}.jpg`;
+                return `/${role}.png`;
+            },
+            formattedUltimaConexion() {
+                if (!this.user || !this.user.ultima_conexion) return "";
+
+                const fecha = new Date(this.user.ultima_conexion);
+
+                const f = fecha.toISOString().slice(0, 10);  // fecha
+                const h = fecha.toTimeString().slice(0, 5);   // hora
+
+                return `${f} | ${h}`;
             }
         },
         mounted() {
@@ -58,16 +71,19 @@ import Swal from 'sweetalert2';
             async onDeleteUser(){
                 const result = await Swal.fire({
                     title: '¿Estás seguro?',
-                    text: '¿Quieres inhabilitar al usuario?',
+                    text: `¿Quieres inhabilitar al usuario ${this.user.name}?`,
                     icon: 'warrning',
                     showCancelButton: true,
                 });
-                if(!result.isConfirmed){
+                if(!result.isConfirmed) {
                     return;
                 }
-                Swal.fire('Eliminado')
                 //await backend.delete(`usuarios/${this.user.id}`);
                 //this.display = false;
+                Swal.fire(`Inhabilitado ${this.user.name}`)
+            },
+            async onEditUser(){
+                this.$router.push({name: 'users.edit', params: {id: this.user.id}});
             }
         }
     };

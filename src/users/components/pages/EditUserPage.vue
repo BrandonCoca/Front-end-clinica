@@ -2,7 +2,7 @@
     <div class="users-container">
         <v-card class="mt-8 mx-auto" max-width="1000">
             <v-container>
-                <v-from @submit.prevent="onSubmit">
+                <v-form @submit.prevent="onSubmit">
                     <v-row>
                         <v-col cols="12" class="mt-2">
                             <v-text-field label="Nombre del usuario" v-model="user.name"></v-text-field>
@@ -18,7 +18,7 @@
                             <v-btn type="button" class="btn-nor" :to="{name: 'users.index'}">Cancelar</v-btn>
                         </v-col>
                     </v-row>
-                </v-from>
+                </v-form>
             </v-container>
         </v-card>
     </div>
@@ -31,6 +31,7 @@ export default {
         return {
             user: {
                 name: '',
+                rol:''
             },
             selectRole: '',
             roleOptions: [
@@ -44,7 +45,7 @@ export default {
     async mounted() {
         const userId = this.$route.params.id;
         this.user = (await backend.get(`usuarios/${userId}`)).data;
-        this.selectRole = this.user.role;
+        this.selectRole = this.user.rol;
     },
     methods: {
         async onSubmit() {
@@ -52,6 +53,7 @@ export default {
                 name: this.user.name,
                 rol: this.selectRole
             });
+            this.$router.push({ name: 'users.index' });
         }
     }
 }

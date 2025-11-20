@@ -26,10 +26,10 @@
             </li>
           </ul>
         </div>
-        <div v-on:click="otherMenu" :style="{cursor: 'pointer', borderRadius: '50%', width: '50px', height: '50px', backgroundImage: `url('/admin.jpg')`, backgroundSize: 'contain'}" ref="btnSignUp">
+        <div v-on:click="otherMenu" :style="{cursor: 'pointer', borderRadius: '50%', width: '50px', height: '50px', backgroundImage: `url(${userAvatar})`, backgroundSize: 'contain'}" ref="btnSignUp">
           <ul v-if="isActive" class="custom-dropdown-menu">
             <li class="liother">
-              Perfil
+              Perfil - {{ user.nombre || 'Cargando...' }}
             </li>
             <li v-on:click="onLogout" class="liother">
               Cerrar sesión
@@ -46,6 +46,9 @@
 </template>
 
 <script>
+import { TokenService } from './auth/services/TokenService';
+import axios from 'axios';
+
 export default {
   name: 'App',
   data() {
@@ -53,9 +56,22 @@ export default {
       menuMostrar: false,
       menuMin: false,
       isActive: false,
+      user: {
+        nombre: '',
+        role: ''
+      }
     }
   },
-  mounted() {
+  computed: {
+    userAvatar() {
+      const role = this.user.role ? this.user.role.toLowerCase() : 'default';
+      return `/${role}.png`;
+    }
+  },
+  async mounted() {
+    // Cargar perfil del usuario
+    await this.loadUserProfile();
+    
     if (this.$route.meta.showHeader) {
       this.initResponsive()
       window.addEventListener("resize", this.handleResize)
@@ -79,6 +95,29 @@ export default {
     }
   },
   methods: {
+    async loadUserProfile() {
+      try {
+        const token = TokenService.get();
+        if (!token) {
+          this.$router.push({ name: 'login' });
+          return;
+        }
+
+        const response = await axios.get('http://localhost:3000/api/v1/perfil', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        this.user = response.data;
+      } catch (error) {
+        console.error('Error al cargar perfil:', error);
+        if (error.response?.status === 403 || error.response?.status === 401) {
+          TokenService.clear();
+          this.$router.push({ name: 'login' });
+        }
+      }
+    },
     toggleMenu() {
       this.menuMostrar = !this.menuMostrar
       this.responsiveY()
@@ -87,6 +126,7 @@ export default {
       this.isActive = !this.isActive
     },
     onLogout(){
+      TokenService.clear();
       this.$router.push({name: 'login'})
     },
     responsiveY() {
@@ -108,7 +148,7 @@ export default {
         return
       }
 
-      const btnElement = btnSignUp.$el || btnSignUp
+      const btnElement = btnSignUp
 
       if (window.innerWidth <= 865) {
         menuOpciones.children[0].appendChild(btnElement)

@@ -34,9 +34,14 @@
 
         methods: {
             async onLogin(){
-                const response = await AuthService.login(this.name, this.password);
-                if(response.token){
-                    this.$router.push({ name: 'dashboard' })
+                try {
+                    const response = await AuthService.login(this.name, this.password);
+
+                    if (response && response.token) {
+                        this.$router.push({ name: 'dashboard' });
+                    }
+                } catch (e) {
+                    //
                 }
             }
         }
