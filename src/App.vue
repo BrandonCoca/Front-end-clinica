@@ -69,7 +69,6 @@ export default {
     }
   },
   async mounted() {
-    // Cargar perfil del usuario
     await this.loadUserProfile();
     
     if (this.$route.meta.showHeader) {
@@ -83,6 +82,9 @@ export default {
   watch: {
     '$route'(to, from) {
       this.menuMostrar = false
+      if (to.meta.requiresAuth && to.name !== from.name) {
+        this.loadUserProfile();
+      }
       
       if (to.meta.showHeader && !from.meta.showHeader) {
         this.$nextTick(() => {

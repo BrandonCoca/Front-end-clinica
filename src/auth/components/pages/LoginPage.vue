@@ -8,6 +8,7 @@
                     <v-container style="display: flex; align-items: center; flex-direction: column">
                         <v-text-field class="mb-2 w-100" hide-details bg-color="hsl(221,86%,88%)" variant="plain" v-model="name" prepend-inner-icon="mdi-account" label="Usuario"></v-text-field>
                         <v-text-field class="mb-2 w-100" hide-details bg-color="hsl(221,86%,88%)" variant="plain" v-model="password" type="password" prepend-inner-icon="mdi-lock" label="Contraseña"></v-text-field>
+                        <v-alert class="mb-3" v-if="error" type="error" title="Credenciales incorrectas" text="Posiblemente coloco de forma incorrecta el usuario o la contraseña. Por favor vuelva a intentarlo"></v-alert>
                         <v-btn class="btn-nor" v-on:click="onLogin()">Iniciar sesión</v-btn>
                     </v-container>
                 </div>
@@ -29,19 +30,23 @@
             return {
                 name: '',
                 password: '',
+                error: null,
             }
         },
 
         methods: {
             async onLogin(){
+                let response = null;
                 try {
-                    const response = await AuthService.login(this.name, this.password);
+                    response = await AuthService.login(this.name, this.password);
 
-                    if (response && response.token) {
+                    if (response.token) {
                         this.$router.push({ name: 'dashboard' });
                     }
-                } catch (e) {
-                    //
+                } catch (error) {
+                    if(error.response.status == 401){
+                        return this.error = 'Credenciales incorrectas. Por favor, intente de nuevo.';
+                    }
                 }
             }
         }
