@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+:root {
+    --background-color: rgb(253, 251, 246);
+    --color-principal: rgb(151, 216, 216);
+    --color-texto: rgb(68, 68, 68);
+    --color-hover: rgb(3, 85, 87);
+    --color-titulo: rgb(5, 103, 105);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    color: var(--color-texto);
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: 80px;
+    color: var(--color-texto);
+    background-color: var(--background-color);
+}
+
+header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: linear-gradient(to left, #C1ECE8, #08605D);
+}
+
+header .contenedor {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1280px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+}
+
+header .logo ion-icon {
+    font-size: 35px;
+    color: var(--color-principal);
+    margin-right: 5px;
+}
+
+header .im {
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+}
+
+header .logo span {
+    font-size: 25px;
+    font-weight: 600;
+    color: var(--color-titulo);
+}
+
+header .menu-opciones {
+
+    background-color: var(--background-color);
+    height: auto;
+}
+
+header .menu-opciones ul {
+
+    display: flex;
+    flex-direction: row;
+}
+
+header .menu-opciones li {
+    list-style: none;
+    margin: 15px;
+}
+
+header .menu-opciones a {
+    color: var(--color-texto);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+header .menu-opciones a:hover {
+    color: var(--color-principal);
+}
+
+header .controles-usuario {
+
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    order: 1;
+}
+
+header .controles-usuario ion-icon {
+    font-size: 25px;
+    cursor: pointer;
+    color: var(--color-principal);
+}
+
+header .controles-usuario ion-icon:hover {
+    color: var(--color-hover);
+}
+
+header .btn-system {
+    border: none;
+    cursor: pointer;
+    width: 110px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: var(--color-principal);
+    color: var(--color-texto);
+    font-size: 15px;
+}
+
+header #btn-sign-up:hover {
+    background-color: var(--color-hover);
+}
+
+header #btn-menu {
+    display: none;
+}
+
+header #home {
+    color: var(--color-principal);
+}
+
+main {
+    margin-top: 80px;
+}
+
+main .seccion-1 {
+    max-width: 1280px;
+    margin: 0 auto;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 865px) {
+
+    header #btn-menu {
+        display: block;
+    }
+
+    header .menu-opciones {
+        height: 0;
+
+        overflow: hidden;
+        border-bottom: 2px solid var(--color-principal);
+        transition: height 0.5s ease;
+    }
+
+    header .menu-opciones.mostrar {
+        height: 280px;
+    }
+
+    header .menu-opciones.min {
+        height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+
+    header .menu-opciones ul {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width:325px) {
+    header .logo ion-icon {
+        display: none;
+    }
+
+    header .logo span {
+        font-size: 20px;
+    }
+}
+
+
+@media (max-width: 1000px) {
+    main .seccion-1 {
+        width: 100%;
+    }
+
+    main .seccion-1 img {
+        width: 50vw;
+    }
+
+    main .seccion-1 {
+        width: 100%;
+        justify-content: start;
+        padding-top: 25px;
+        flex-direction: column;
+    }
+
+    main .seccion-1 .texto {
+        text-align: center;
+        width: 80%;
+        order: 1;
+        margin-top: 20px;
+    }
+
+    main .seccion-1 img {
+        width: 60vw;
+    }
+}
+
+@media (max-width: 615px) {
+    main .seccion-1 img {
+        width: 100vw;
+    }
+}
+
+.btn-nor {
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: var(--color-principal);
+    color: var(--color-texto);
+    font-size: 15px;
+}
+
+.users-container {
+    padding-top: 80px;
+    padding-inline: 20px;
+}
+
+.v-card-subtitle {
+    color: black;
+}
