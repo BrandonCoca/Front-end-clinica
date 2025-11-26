@@ -6,7 +6,6 @@
                     <v-row class="my-4">
                         <v-col cols="12">
                             <v-text-field v-model="nombre" label="Nombre del paciente" required>
-                                
                             </v-text-field>
                         </v-col>
                         <v-col cols="12" md="6">
@@ -14,17 +13,14 @@
                             </v-text-field>
                         </v-col>
                         <v-col cols="12" md="6">
-                            <v-text-field v-model="fecha_nacimiento" label="Fecha de nacimiento" type="date" required>
+                            <v-text-field v-model="fecha_nac" label="Fecha de nacimiento" type="date" required>
                             </v-text-field>
                         </v-col>
                         <v-col cols="12" md="6">
-                            <v-radio-group v-model="form.genero" label="Género">
-                                <v-radio label="Masculino" :value="true"></v-radio>
-                                <v-radio label="Femenino" :value="false"></v-radio>
-                            </v-radio-group>
+                            <v-select label="Género" v-model="genero" :items="generoOptions" item-value="value" item-title="text"></v-select>
                         </v-col>
                         <v-col cols="12" md="6">
-                            <v-text-field v-model="celular" label="Celular" required>
+                            <v-text-field v-model="cel" label="Celular" required>
                             </v-text-field>
                         </v-col>
                         <v-col cols="6" class="d-flex justify-center">
@@ -33,7 +29,7 @@
                             </v-btn>
                         </v-col>
                         <v-col cols="6" class="d-flex justify-center">
-                            <v-btn type="submit" class="btn-nor">
+                            <v-btn type="button" class="btn-nor" @click="onCancel">
                                 Cancelar
                             </v-btn>
                         </v-col>
@@ -44,20 +40,49 @@
     </div>
 </template>
 <script>
+import Swal from 'sweetalert2';
+import backend from '@/backend.js';
 export default {
     data() {
         return {
-            form: {
-                nombre: '',
-                ci: '',
-                fecha_nacimiento: '',
-                genero: null,
-                celular: '',
-            }
+            nombre: '',
+            ci: '',
+            fecha_nac: '',
+            cel: '',
+            genero: null,
+            generoOptions: [
+                {text: 'Masculino', value: true},
+                {text: 'Femenino', value: false},
+            ],
         }
     },
     methods: {
-        onSubmit(){
+        async onSubmit(){
+            if(!this.nombre || !this.ci || !this.fecha_nac || this.genero === null || !this.celular){
+                return Swal.fire({
+                    icon: 'error',
+                    title: '¡Ups!',
+                    text: 'Todos los campos son requeridos',
+                })
+            }
+            try{
+                await backend.post('pacientes', {
+                    nombre: this.nombre,
+                    ci: this.ci,
+                    fecha_nac: this.fecha_nac,
+                    genero: this.generoOptions.value,
+                    celular: this.celular,
+                });
+            }catch(error){
+                return Swal.fire({
+                    icon: 'error',
+                    title: '¡Ups!',
+                    text: error.response.data.message ?? null,
+                })
+            }
+            this.$router.push({ name: 'patients.index' });
+        },
+        onCancel(){
             this.$router.push({ name: 'patients.index' });
         }
     }
